@@ -1,78 +1,62 @@
-/* Reset default margins and paddings */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* src/component/Home/Home.css */
+.spectacledcoder-topnav {
+  overflow: hidden;
+  background-color: #000000;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-}
-
-html {
-  scroll-behavior: smooth; /* Enables smooth scrolling */
-}
-
-/* Fixed navbar */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #333;
-  padding: 1rem;
-  z-index: 1000; /* Ensure navbar stays above content */
-}
-
-.navbar-links {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-}
-
-.navbar-links li {
-  margin: 0 20px;
-}
-
-.navbar-links a {
-  color: white;
+.spectacledcoder-topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
   text-decoration: none;
-  font-size: 1.2rem;
-}
-
-.navbar-links a:hover {
-  color: #ff6347;
-}
-
-/* Active link styling */
-.navbar-links a.active {
-  color: #ff6347;
+  font-size: 17px;
+  font-family: courier new;
   font-weight: bold;
 }
 
-/* Section styling */
-.section {
-  padding: 100px 20px;
-  height: 100vh; /* Each section takes full viewport height */
+.spectacledcoder-topnav a:hover {
+  background-color: #ff5959;
+  color: black;
 }
 
-#section1 {
-  background-color: #f4f4f4;
+.spectacledcoder-topnav a.spectacledcoder-active {
+  background-color: #ff0000;
+  color: white;
 }
 
-#section2 {
-  background-color: #e2e2e2;
+.spectacledcoder-topnav .spectacledcoder-icon {
+  display: none;
 }
 
-#section3 {
-  background-color: #cccccc;
+@media screen and (max-width: 600px) {
+  .spectacledcoder-topnav a:not(:first-child) {
+    display: none;
+  }
+  .spectacledcoder-topnav a.spectacledcoder-icon {
+    float: right;
+    display: block;
+  }
 }
 
-#section4 {
-  background-color: #aaaaaa;
+@media screen and (max-width: 600px) {
+  .spectacledcoder-topnav.responsive {
+    position: relative;
+  }
+  .spectacledcoder-topnav.responsive .spectacledcoder-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .spectacledcoder-topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
 }
 
-/* Adding extra padding for content to prevent hiding under navbar */
-.section h1 {
-  margin-top: 80px;
+.spectacledcoder-right-lnk {
+  float: right;
 }
+

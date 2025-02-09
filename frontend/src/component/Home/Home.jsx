@@ -1,83 +1,62 @@
-import React, { useState } from "react";
-import "./Home.css"; // Import the CSS file
+// src/component/Home/Home.jsx
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './Home.css';
 
 const Home = () => {
-  // State to track the active section
-  const [activeSection, setActiveSection] = useState("section1");
+  const [isResponsive, setIsResponsive] = useState(false);
+  const navigate = useNavigate();
 
-  // Function to handle smooth scrolling
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      setActiveSection(sectionId); // Update the active section
-    }
+  const toggleResponsive = () => {
+    setIsResponsive(!isResponsive);
   };
 
   return (
     <div>
-      {/* Navbar */}
-      <nav className="navbar">
-        <ul className="navbar-links">
-          <li>
-            <a
-              href="#section1"
-              onClick={() => scrollToSection("section1")}
-              className={activeSection === "section1" ? "active" : ""}
-            >
-              Home
-            </a>
-          </li>
-          <li>
-            <a
-              href="#section2"
-              onClick={() => scrollToSection("section2")}
-              className={activeSection === "section2" ? "active" : ""}
-            >
-              About
-            </a>
-          </li>
-          <li>
-            <a
-              href="#section3"
-              onClick={() => scrollToSection("section3")}
-              className={activeSection === "section3" ? "active" : ""}
-            >
-              Services
-            </a>
-          </li>
-          <li>
-            <a
-              href="#section4"
-              onClick={() => scrollToSection("section4")}
-              className={activeSection === "section4" ? "active" : ""}
-            >
-              Contact
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div className={`spectacledcoder-topnav ${isResponsive ? 'responsive' : ''}`} id="myTopnav">
+        <Link to="#" className="spectacledcoder-active">
+          Home <i className="fa fa-home" aria-hidden="true"></i>
+        </Link>
+        <Link to="#">
+          Blog <i className="fa fa-book"></i>
+        </Link>
+        <Link to="#">
+          Contact <i className="fa fa-envelope"></i>
+        </Link>
+        <Link to="#">
+          About <i className="fa fa-user"></i>
+        </Link>
+        <div className="spectacledcoder-right-lnk">
+          <Link to="/login">Login / Signup</Link>
+        </div>
+        <a href="#" className="spectacledcoder-icon" onClick={toggleResponsive}>
+          <i className="fa fa-bars"></i>
+        </a>
+      </div>
 
-      {/* Content Sections */}
-      <section id="section1" className="section">
-        <h1>Home</h1>
-        <p>Welcome to the home section. Scroll down for more sections.</p>
-      </section>
-
-      <section id="section2" className="section">
-        <h1>About</h1>
-        <p>This is the about section. You can learn more about us here.</p>
-      </section>
-
-      <section id="section3" className="section">
-        <h1>Services</h1>
-        <p>Explore the services we offer.</p>
-      </section>
-
-      <section id="section4" className="section">
-        <h1>Contact</h1>
-        <p>Feel free to get in touch with us via this section.</p>
-      </section>
+      <div style={{ paddingLeft: '16px' }}>
+        <h2>Responsive Topnav Example</h2>
+        <p>
+          Resize the browser window to see how it works, made with ❤️ by Jason. Please subscribe to my youtube channel.{' '}
+          <a href="https://www.youtube.com/channel/UCQrfBdkEyplOXW4yqK26asw" target="_blank" rel="noopener noreferrer">
+            HERE
+          </a>{' '}
+          icons made with Font Awesome <i className="fa fa-font-awesome"></i>
+        </p>
+        {/*login button*/}
+        <button
+              onClick={() => navigate("/login")}
+              style={{
+                background: "none",
+                border: "none",
+                color: "black",
+                fontSize: "1.2rem",
+                cursor: "pointer",
+              }}
+            >
+              Login
+            </button>
+      </div>
     </div>
   );
 };
