@@ -1,78 +1,38 @@
-/* Reset default margins and paddings */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.App {
+  text-align: center;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-html {
-  scroll-behavior: smooth; /* Enables smooth scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
-/* Fixed navbar */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #333;
-  padding: 1rem;
-  z-index: 1000; /* Ensure navbar stays above content */
-}
-
-.navbar-links {
-  list-style: none;
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-}
-
-.navbar-links li {
-  margin: 0 20px;
-}
-
-.navbar-links a {
+  font-size: calc(10px + 2vmin);
   color: white;
-  text-decoration: none;
-  font-size: 1.2rem;
 }
 
-.navbar-links a:hover {
-  color: #ff6347;
+.App-link {
+  color: #61dafb;
 }
 
-/* Active link styling */
-.navbar-links a.active {
-  color: #ff6347;
-  font-weight: bold;
-}
-
-/* Section styling */
-.section {
-  padding: 100px 20px;
-  height: 100vh; /* Each section takes full viewport height */
-}
-
-#section1 {
-  background-color: #f4f4f4;
-}
-
-#section2 {
-  background-color: #e2e2e2;
-}
-
-#section3 {
-  background-color: #cccccc;
-}
-
-#section4 {
-  background-color: #aaaaaa;
-}
-
-/* Adding extra padding for content to prevent hiding under navbar */
-.section h1 {
-  margin-top: 80px;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
