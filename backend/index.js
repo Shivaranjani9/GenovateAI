@@ -8,7 +8,7 @@ console.log("MONGO_URI:", process.env.MONGO_URI);
 const app = express();
 
 // Basic Route
-app.get("/register", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Backend is running");
 });
 

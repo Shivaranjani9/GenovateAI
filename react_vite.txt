@@ -1,7 +1,7 @@
 this is React_vite file
 
 see mphasis learning->domain->assignment2
-
+MONGO_URI=mongodb+srv://shivaranjania9:b3xQPZMRcvGOrwhK@genovateai.ffa7t.mongodb.net/?retryWrites=true&w=majority&appName=GenovateAI
 username:shivaranjania9
 pwd:b3xQPZMRcvGOrwhK
 
