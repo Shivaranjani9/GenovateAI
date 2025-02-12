@@ -1,8 +1,11 @@
 import React from "react";
 import { Navbar, Nav, Button, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -28,7 +31,7 @@ const Home = () => {
               <Nav.Link onClick={() => scrollToSection("analysis")} className="nav-item">Analysis</Nav.Link>
               <Nav.Link onClick={() => scrollToSection("contact")} className="nav-item">Contact Us</Nav.Link>
             </Nav>
-            <Button variant="dark" className="custom-login-btn">
+            <Button variant="dark" className="custom-login-btn" onClick={() => navigate("/login")}> 
               Login
             </Button>
           </Navbar.Collapse>
