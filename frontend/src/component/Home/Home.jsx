@@ -1,63 +1,45 @@
-// src/component/Home/Home.jsx
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './Home.css';
+import React from "react";
+import { Navbar, Nav, Button, Container } from "react-bootstrap";
+import "./Home.css";
 
 const Home = () => {
-  const [isResponsive, setIsResponsive] = useState(false);
-  const navigate = useNavigate();
-
-  const toggleResponsive = () => {
-    setIsResponsive(!isResponsive);
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
-    <div>
-      <div className={`spectacledcoder-topnav ${isResponsive ? 'responsive' : ''}`} id="myTopnav">
-        <Link to="#" className="spectacledcoder-active">
-          Home <i className="fa fa-home" aria-hidden="true"></i>
-        </Link>
-        <Link to="#">
-          Blog <i className="fa fa-book"></i>
-        </Link>
-        <Link to="#">
-          Contact <i className="fa fa-envelope"></i>
-        </Link>
-        <Link to="#">
-          About <i className="fa fa-user"></i>
-        </Link>
-        <div className="spectacledcoder-right-lnk">
-          <Link to="/login">Login / Signup</Link>
-        </div>
-        <a href="#" className="spectacledcoder-icon" onClick={toggleResponsive}>
-          <i className="fa fa-bars"></i>
-        </a>
-      </div>
+    <>
+      {/* Full-width Navbar */}
+      <Navbar expand="lg" fixed="top" className="navbar-box">
+        <Container>
+          <Navbar.Brand onClick={() => scrollToSection("home")} className="navbar-brand">
+            <img src="/images/logo.png" alt="Logo" className="navbar-logo" />
+          </Navbar.Brand>
 
-      <div style={{ paddingLeft: '16px' }}>
-        <h2>Responsive Topnav Example</h2>
-        <p>
-          Resize the browser window to see how it works, made with ❤️ by Jason. Please subscribe to my youtube channel.{' '}
-          <a href="https://www.youtube.com/channel/UCQrfBdkEyplOXW4yqK26asw" target="_blank" rel="noopener noreferrer">
-            HERE
-          </a>{' '}
-          icons made with Font Awesome <i className="fa fa-font-awesome"></i>
-        </p>
-        {/*login button*/}
-        <button
-              onClick={() => navigate("/login")}
-              style={{
-                background: "none",
-                border: "none",
-                color: "black",
-                fontSize: "1.2rem",
-                cursor: "pointer",
-              }}
-            >
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+          <Navbar.Collapse id="basic-navbar-nav" className="justify-content-between">
+            <Nav className="mx-auto navbar-links">
+              <Nav.Link onClick={() => scrollToSection("home")} className="nav-item">Home</Nav.Link>
+              <Nav.Link onClick={() => scrollToSection("about")} className="nav-item">About</Nav.Link>
+              <Nav.Link onClick={() => scrollToSection("analysis")} className="nav-item">Analysis</Nav.Link>
+              <Nav.Link onClick={() => scrollToSection("contact")} className="nav-item">Contact Us</Nav.Link>
+            </Nav>
+            <Button variant="dark" className="custom-login-btn">
               Login
-            </button>
+            </Button>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+      {/* Quote Box Below Navbar */}
+      <div className="quote-box">
+        "Your health is an investment, not an expense."
       </div>
-    </div>
+    </>
   );
 };
 

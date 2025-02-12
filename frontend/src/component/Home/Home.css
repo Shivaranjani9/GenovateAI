@@ -1,68 +1,122 @@
-/* src/component/Home/Home.css */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Full-width Navbar with Shadow */
+.navbar-box {
+  width: 100%;
+  background: white;
+  padding: 15px 15px; /* Adjusted padding */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
 }
 
-.spectacledcoder-topnav {
-  overflow: hidden;
-  background-color: #000000;
+/* Logo - Significantly Increased Size */
+.navbar-brand {
+  display: flex;
+  align-items: center;
 }
 
-.spectacledcoder-topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  font-family: courier new;
+.navbar-logo {
+  height: 120px; /* Increased height */
+  width: auto;
+}
+
+/* Navbar Links - Spread Out */
+.navbar-links {
+  width: 65%; /* Adjusted width for even spacing */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Navigation Links */
+.nav-item {
+  font-size: 24px; /* Increased font size */
+  font-weight: 700;
+  color: black !important;
+  transition: 0.3s ease-in-out;
+  padding: 14px 22px; /* Slightly bigger padding */
+  border-radius: 5px;
+}
+
+/* Hover Effect on Nav Links - Turns Blue */
+.nav-item:hover {
+  background-color: #007bff;
+  color: white !important;
+  transform: scale(1.1);
+}
+
+/* Login Button - Bigger & Styled */
+.custom-login-btn {
+  font-size: 22px; /* Increased font size */
+  padding: 14px 30px; /* Bigger button */
+  border-radius: 6px;
+  transition: 0.3s ease-in-out;
+  border: 2px solid black;
   font-weight: bold;
 }
 
-.spectacledcoder-topnav a:hover {
-  background-color: #ff5959;
-  color: black;
+/* Hover Effect on Login Button - Changes Color */
+.custom-login-btn:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }
 
-.spectacledcoder-topnav a.spectacledcoder-active {
-  background-color: #ff0000;
+/* Quote Box Below Navbar */
+.quote-box {
+  width: 100%;
+  padding: 35px; /* Increased padding */
+  font-size: 26px; /* Increased font size */
+  font-weight: bold;
+  text-align: center;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Hover Effect on Quote Box */
+.quote-box:hover {
+  background-color: #00bcd4;
   color: white;
 }
 
-.spectacledcoder-topnav .spectacledcoder-icon {
-  display: none;
-}
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .navbar-logo {
+    height: 100px; /* Slightly smaller on medium screens */
+  }
+  
+  .nav-item {
+    font-size: 20px;
+    padding: 12px 18px;
+  }
 
-@media screen and (max-width: 600px) {
-  .spectacledcoder-topnav a:not(:first-child) {
-    display: none;
+  .custom-login-btn {
+    font-size: 20px;
+    padding: 12px 25px;
   }
-  .spectacledcoder-topnav a.spectacledcoder-icon {
-    float: right;
-    display: block;
-  }
-}
 
-@media screen and (max-width: 600px) {
-  .spectacledcoder-topnav.responsive {
-    position: relative;
-  }
-  .spectacledcoder-topnav.responsive .spectacledcoder-icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .spectacledcoder-topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
+  .quote-box {
+    font-size: 22px;
+    padding: 30px;
   }
 }
 
-.spectacledcoder-right-lnk {
-  float: right;
-}
+@media (max-width: 768px) {
+  .navbar-logo {
+    height: 90px; /* Adjusted for mobile */
+  }
 
+  .nav-item {
+    font-size: 18px;
+    padding: 10px 15px;
+  }
+
+  .custom-login-btn {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+
+  .quote-box {
+    font-size: 20px;
+    padding: 25px;
+  }
+}
