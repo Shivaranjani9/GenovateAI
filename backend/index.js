@@ -1,9 +1,8 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const userRoutes = require("../Routes/UserRoute.js");
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import userRoutes from "./Routes/UserRoute.js";
 import { connectDB } from './config/db.js';
 
 dotenv.config();

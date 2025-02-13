@@ -12,7 +12,7 @@ const FooterComponent = () => {
 
   return (
     <footer className="footer">
-      <div className="footer-content">
+      <div className="footer-content" id="contact">
         {/* Left Section - Logo & Address */}
         <div className="footer-left">
           <h2 className="footer-logo">

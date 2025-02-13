@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Login.css";
 import axios from "axios";
+import NavigationBar from "../Home/Navbar"; // Import the Navbar component
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -89,97 +90,100 @@ const Login = () => {
   };
 
   return (
-    <div className="outer-container background">
-      <div className="container">
-        <div className="overlay-container">
-          <div className="overlay">
-            <div className="overlay-panel overlay-left">
-              <h1 className="heading">Welcome to GenovateAI</h1>
-              <p className="section">
-                GenovateAI is a cutting-edge platform for researchers and lab technicians to collaborate and innovate in the field of genomics.
-              </p>
+    <>
+      <NavigationBar />
+      <div className="login-outer-container login-background">
+        <div className="login-container">
+          <div className="login-overlay-container">
+            <div className="login-overlay">
+              <div className="login-overlay-panel login-overlay-left">
+                <h1 className="login-heading">Welcome to GenovateAI</h1>
+                <p className="login-section">
+                  GenovateAI is a cutting-edge platform for researchers and lab technicians to collaborate and innovate in the field of genomics.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="form-container log-in-container">
-          <form className="input-form">
-            <h1 className="heading">Login</h1>
-            <div className="formgroup">
-              <select
-                className="input"
-                value={category}
-                onChange={handleCategoryChange}
-              >
-                <option value="">Select Category</option>
-                <option value="Researcher">Researcher</option>
-                <option value="Lab Technician">Lab Technician</option>
-              </select>
-            </div>
-            {category === "Researcher" && (
-              <div className="formgroup">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Enter your Res ID"
-                  value={resId}
-                  onChange={handleResIdChange}
-                />
+          <div className="login-form-container login-log-in-container">
+            <form className="login-input-form">
+              <h1 className="login-headings">Login</h1>
+              <div className="login-formgroup">
+                <select
+                  className="login-input"
+                  value={category}
+                  onChange={handleCategoryChange}
+                >
+                  <option value="">Select Category</option>
+                  <option value="Researcher">Researcher</option>
+                  <option value="Lab Technician">Lab Technician</option>
+                </select>
               </div>
-            )}
-            {category === "Lab Technician" && (
-              <div className="formgroup">
+              {category === "Researcher" && (
+                <div className="login-formgroup">
+                  <input
+                    className="login-input"
+                    type="text"
+                    placeholder="Enter your Res ID"
+                    value={resId}
+                    onChange={handleResIdChange}
+                  />
+                </div>
+              )}
+              {category === "Lab Technician" && (
+                <div className="login-formgroup">
+                  <input
+                    className="login-input"
+                    type="text"
+                    placeholder="Enter your Lab ID"
+                    value={labId}
+                    onChange={handleLabIdChange}
+                  />
+                </div>
+              )}
+              <div className="login-formgroup">
                 <input
-                  className="input"
-                  type="text"
-                  placeholder="Enter your Lab ID"
-                  value={labId}
-                  onChange={handleLabIdChange}
+                  className="login-input"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={handlePasswordChange}
                 />
+                <p className="login-showPassword1" onClick={togglePasswordVisibility}>
+                  {showPassword ? (
+                    <i className="bi bi-eye-slash"></i>
+                  ) : (
+                    <i className="bi bi-eye"></i>
+                  )}
+                </p>
               </div>
-            )}
-            <div className="formgroup">
-              <input
-                className="input"
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-              <p className="showPassword1" onClick={togglePasswordVisibility}>
-                {showPassword ? (
-                  <i className="bi bi-eye-slash"></i>
-                ) : (
-                  <i className="bi bi-eye"></i>
-                )}
-              </p>
-            </div>
-            <button type="button" className="submit" onClick={handleLogin}>
-              Login
-            </button>
-            <Link
-              to="/forgotpassword"
-              className="mb-3 mt-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-            >
-              Forgot Password
-            </Link>
-            <p className="d-inline">
-              Not a Member?
+              <button type="button" className="login-submit" onClick={handleLogin}>
+                Login
+              </button>
               <Link
-                to="/registration"
-                className="mb-3 mt-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                to="/forgotpassword"
+                className="mb-3 mt-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover text-decoration-none"
               >
-                SignUp
+                Forgot Password
               </Link>
-            </p>
-            {errorField && (
-              <div className="error-message text-danger text-center">
-                {errorField}
-              </div>
-            )}
-          </form>
+              <p className="d-inline">
+                Not a Member?
+                <Link
+                  to="/registration"
+                  className="mb-3 mt-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover text-decoration-none"
+                >
+                  SignUp
+                </Link>
+              </p>
+              {errorField && (
+                <div className="login-error-message text-danger text-center">
+                  {errorField}
+                </div>
+              )}
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

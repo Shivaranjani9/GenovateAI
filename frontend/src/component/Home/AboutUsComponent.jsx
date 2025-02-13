@@ -4,12 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is loaded
 
 const AboutUsComponent = () => {
   const teamMembers = [
-    { id: 1, name: "John Doe", role: "Web Developer", img: "/images/person1.png" },
-    { id: 2, name: "Jane Smith", role: "UI/UX Designer", img: "/images/person2.jpg" },
-    { id: 3, name: "Michael Brown", role: "Backend Developer", img: "/images/person3.jpg" },
-    { id: 4, name: "Sarah Lee", role: "Project Manager", img: "/images/person4.jpg" },
-    { id: 5, name: "David Wilson", role: "Software Engineer", img: "/images/person5.jpg" },
-    { id: 6, name: "Emily Johnson", role: "Data Scientist", img: "/images/person5.jpg" }, // Top image
+    { id: 2, name: "Ms.Nidhi Sahu", role: "Variant Impact Assesment Expert", img: "/images/Nidhi Sahu.png" },
+    { id: 3, name: "Ms.Kalpana K L", role: "Variant Impact Assesment Expert", img: "/images/Kalpana.png" },
+    { id: 4, name: "Mr.Rohit Rajendra Rokade", role: "Functional Annotation Expert", img: "/images/Rohit.png" },
+    { id: 5, name: "Ms.Kalyani Patil", role: "Lung Cancer Prediction Expert", img: "/images/Kalyani.png" },
+    { id: 6, name: "Ms.Shivaranjani A", role: "Gene Expression Prediction Expert", img: "/images/Shivaranjani.png" },
+    { id: 1, name: "Ms.Karuna P", role: "Project Guide", img: "/images/person1.png" }, // Top image
   ];
 
   return (

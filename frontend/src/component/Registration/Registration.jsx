@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Registration.css";
 import axios from "axios";
+import NavigationBar from "../Home/Navbar";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -18,6 +19,8 @@ const Registration = () => {
   const [errorField, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const nameInputRef = useRef(null);
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -28,14 +31,29 @@ const Registration = () => {
     return Math.floor(100000 + Math.random() * 900000); // Generates a 6-digit number
   };
 
-  const handleCategoryChange = (e) => {
-    const value = e.target.value;
-    setCategory(value);
-    if (value === "Researcher") {
+  useEffect(() => {
+    // Auto-focus on the name input field when the component mounts
+    if (nameInputRef.current) {
+      nameInputRef.current.focus();
+    }
+
+    // Clear form fields when the component unmounts
+    return () => {
+      clearFields();
+    };
+  }, []);
+
+  useEffect(() => {
+    // Generate IDs when category changes
+    if (category === "Researcher") {
       setResId(`RES${generateId()}`);
-    } else if (value === "Lab Technician") {
+    } else if (category === "Lab Technician") {
       setLabId(`LAB${generateId()}`);
     }
+  }, [category]);
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
     setError("");
   };
 
@@ -100,14 +118,17 @@ const Registration = () => {
     setError("");
     const registrationData = { category, resId, labId, name, email, phoneNumber, gender, password, securityQuestion, securityAnswer };
     axios
-      .post("http://localhost:3005/api/register", registrationData)
+      .post("http://localhost:5000/api/register", registrationData)
       .then((response) => {
         if (response.data.message === "Registration successful") {
           console.log("Registration successful");
+          alert("Registered Successfully");
+          clearFields();
           navigate("/login");
         } else {
           setError("Registration failed");
           console.error("Registration failed:", response.data.error);
+          alert("Error Registering Failed. Please try again later.");
         }
       })
       .catch((error) => {
@@ -116,160 +137,175 @@ const Registration = () => {
       });
   };
 
+  function clearFields() {
+    setName("");
+    setEmail("");
+    setPhoneNumber("");
+    setGender("");
+    setPassword("");
+    setConfirmPassword("");
+    setSecurityQuestion("");
+    setSecurityAnswer("");
+  }
+
   return (
-    <div className="outer-container background">
-      <div className="container">
-        <div className="overlay-container">
-          <div className="overlay">
-            <div className="overlay-panel overlay-left">
-              <h1 className="heading">Welcome to GenovateAI</h1>
-              <p className="section">
-                GenovateAI is a cutting-edge platform for researchers and lab technicians to collaborate and innovate in the field of genomics.
-              </p>
+    <>
+      <NavigationBar />
+      <div className="registration-outer-container registration-background">
+        <div className="registration-container">
+          <div className="registration-overlay-container">
+            <div className="registration-overlay">
+              <div className="registration-overlay-panel registration-overlay-left">
+                <h1 className="registration-heading">Welcome to GenovateAI</h1>
+                <p className="registration-section">
+                  GenovateAI is a cutting-edge platform for researchers and lab technicians to collaborate and innovate in the field of genomics.
+                </p>
+                <p className="registration-sections fst-italic">Register Yourself before entering to the World of GenovateAI!</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="form-container log-in-container">
-          <form className="input-form">
-            <h1 className="heading">Register</h1>
-            <div className="formgroup">
-              <select
-                className="input"
-                value={category}
-                onChange={handleCategoryChange}
-              >
-                <option value="">Select Category</option>
-                <option value="Researcher">Researcher</option>
-                <option value="Lab Technician">Lab Technician</option>
-              </select>
-            </div>
-            {category === "Researcher" && (
-              <div className="formgroup">
+          <div className="registration-form-container registration-log-in-container">
+            <form className="registration-input-form">
+              <div className="registration-formgroup">
+                <select
+                  className="registration-input"
+                  value={category}
+                  onChange={handleCategoryChange}
+                >
+                  <option value="">Select Category</option>
+                  <option value="Researcher">Researcher</option>
+                  <option value="Lab Technician">Lab Technician</option>
+                </select>
+              </div>
+              {category === "Researcher" && (
+                <div className="registration-formgroup">
+                  <input
+                    className="registration-input"
+                    type="text"
+                    placeholder="Res ID"
+                    value={resId}
+                    readOnly
+                  />
+                </div>
+              )}
+              {category === "Lab Technician" && (
+                <div className="registration-formgroup">
+                  <input
+                    className="registration-input"
+                    type="text"
+                    placeholder="Lab ID"
+                    value={labId}
+                    readOnly
+                  />
+                </div>
+              )}
+              <div className="registration-formgroup">
                 <input
-                  className="input"
+                  ref={nameInputRef}
+                  className="registration-input"
                   type="text"
-                  placeholder="Res ID"
-                  value={resId}
-                  readOnly
+                  placeholder="Enter your name"
+                  value={name}
+                  onChange={handleNameChange}
                 />
               </div>
-            )}
-            {category === "Lab Technician" && (
-              <div className="formgroup">
+              <div className="registration-formgroup">
                 <input
-                  className="input"
-                  type="text"
-                  placeholder="Lab ID"
-                  value={labId}
-                  readOnly
+                  className="registration-input"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={handleEmailChange}
                 />
               </div>
-            )}
-            <div className="formgroup">
-              <input
-                className="input"
-                type="text"
-                placeholder="Enter your name"
-                value={name}
-                onChange={handleNameChange}
-              />
-            </div>
-            <div className="formgroup">
-              <input
-                className="input"
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={handleEmailChange}
-              />
-            </div>
-            <div className="formgroup">
-              <input
-                className="input"
-                type="text"
-                placeholder="Enter your phone number"
-                value={phoneNumber}
-                onChange={handlePhoneNumberChange}
-              />
-            </div>
-            <div className="formgroup">
-              <select
-                className="input"
-                value={gender}
-                onChange={handleGenderChange}
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div className="formgroup">
-              <input
-                className="input"
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-              <p className="showPassword1" onClick={togglePasswordVisibility}>
-                {showPassword ? (
-                  <i className="bi bi-eye-slash"></i>
-                ) : (
-                  <i className="bi bi-eye"></i>
-                )}
+              <div className="registration-formgroup">
+                <input
+                  className="registration-input"
+                  type="text"
+                  placeholder="Enter your phone number"
+                  value={phoneNumber}
+                  onChange={handlePhoneNumberChange}
+                />
+              </div>
+              <div className="registration-formgroup">
+                <select
+                  className="registration-input"
+                  value={gender}
+                  onChange={handleGenderChange}
+                >
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div className="registration-formgroup">
+                <input
+                  className="registration-input"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+                <p className="registration-showPassword1" onClick={togglePasswordVisibility}>
+                  {showPassword ? (
+                    <i className="bi bi-eye-slash"></i>
+                  ) : (
+                    <i className="bi bi-eye"></i>
+                  )}
+                </p>
+              </div>
+              <div className="registration-formgroup">
+                <input
+                  className="registration-input"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Confirm your password"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                />
+              </div>
+              <div className="registration-formgroup">
+                <select
+                  className="registration-input"
+                  value={securityQuestion}
+                  onChange={handleSecurityQuestionChange}
+                >
+                  <option value="">Select Security Question</option>
+                  <option value="What is your pet name?">What is your pet name?</option>
+                  <option value="What is your favorite book?">What is your favorite book?</option>
+                </select>
+              </div>
+              <div className="registration-formgroup">
+                <input
+                  className="registration-input"
+                  type="text"
+                  placeholder="Enter your security answer"
+                  value={securityAnswer}
+                  onChange={handleSecurityAnswerChange}
+                />
+              </div>
+              <button type="button" className="registration-submit" onClick={handleRegistration}>
+                Register
+              </button>
+              <p className="registration-d-inline">
+                Already a Member?
+                <Link
+                  to="/login"
+                  className="mb-3 mt-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                >
+                  Login
+                </Link>
               </p>
-            </div>
-            <div className="formgroup">
-              <input
-                className="input"
-                type={showPassword ? "text" : "password"}
-                placeholder="Confirm your password"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-              />
-            </div>
-            <div className="formgroup">
-              <select
-                className="input"
-                value={securityQuestion}
-                onChange={handleSecurityQuestionChange}
-              >
-                <option value="">Select Security Question</option>
-                <option value="What is your pet name?">What is your pet name?</option>
-                <option value="What is your favorite book?">What is your favorite book?</option>
-              </select>
-            </div>
-            <div className="formgroup">
-              <input
-                className="input"
-                type="text"
-                placeholder="Enter your security answer"
-                value={securityAnswer}
-                onChange={handleSecurityAnswerChange}
-              />
-            </div>
-            <button type="button" className="submit" onClick={handleRegistration}>
-              Register
-            </button>
-            <p className="d-inline">
-              Already a Member?
-              <Link
-                to="/login"
-                className="mb-3 mt-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              >
-                Login
-              </Link>
-            </p>
-            {errorField && (
-              <div className="error-message text-danger text-center">
-                {errorField}
-              </div>
-            )}
-          </form>
+              {errorField && (
+                <div className="registration-error-message text-danger text-center">
+                  {errorField}
+                </div>
+              )}
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
