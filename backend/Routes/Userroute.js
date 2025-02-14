@@ -73,6 +73,7 @@ router.post("/login", async (req, res) => {
 });
 
 // Reset password
+// Reset password
 router.put("/reset-password", async (req, res) => {
   try {
     const { category, userId, secquestion, answer, password } = req.body;
@@ -88,9 +89,8 @@ router.put("/reset-password", async (req, res) => {
       return res.status(400).json({ message: "Invalid security question" });
     }
 
-    // Validate security answer by comparing hashes
-    const isAnswerValid = await bcrypt.compare(answer, user.securityAnswer);
-    if (!isAnswerValid) {
+    // Validate security answer (compare plain text)
+    if (user.securityAnswer !== answer) {
       return res.status(400).json({ message: "Invalid security answer" });
     }
 

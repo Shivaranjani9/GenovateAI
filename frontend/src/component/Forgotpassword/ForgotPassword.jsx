@@ -79,32 +79,24 @@ function ForgotPassword() {
     return { valid: true };
   };
 
-  const resetPassword = (category, resId, labId, secquestion, answer, password) => {
-    const isValidPassword = isPasswordValid(password);
-    if (!isValidPassword.valid) {
-      setFieldsEmpty(isValidPassword.error);
-      return;
-    }
-
+  const resetPassword = async (category, resId, labId, secquestion, answer, password) => {
     const userId = category === "Researcher" ? resId : labId;
     const payload = { category, userId, secquestion, answer, password };
-
-    axios
-      .put("http://localhost:5000/api/reset-password", payload)
-      .then((response) => {
-        if (response.data.message === "Password updated successfully") {
-          alert("Password Updated successfully");
-          navigate("/login");
-        } else {
-          setFieldsEmpty("Failed to reset password. Please try again.");
-        }
-      })
-      .catch((error) => {
-        setFieldsEmpty(error?.response?.data?.message || "An error occurred. Please try again.");
-        console.error("Error during password reset:", error);
-      });
+  
+    try {
+      const response = await axios.put("http://localhost:5000/api/reset-password", payload);
+      if (response.data.message === "Password updated successfully") {
+        alert("Password Updated successfully");
+        navigate("/login");
+      } else {
+        setFieldsEmpty("Failed to reset password. Please try again.");
+      }
+    } catch (error) {
+      setFieldsEmpty(error?.response?.data?.message || "An error occurred. Please try again.");
+      console.error("Error during password reset:", error);
+    }
   };
-
+  
   return (
     <>
       <NavigationBar />
