@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <>
-      <CursorEffect />
+     
       <NavigationBar scrollToSection={scrollToSection} navigate={navigate} />
       <CarouselComponent id="home" /> {/* Add id for Home section */}
       <AboutUsComponent id="about" /> {/* Add id for About section */}

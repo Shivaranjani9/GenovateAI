@@ -96,6 +96,7 @@
   font-size: 1.2rem;
 }
 
+
 /* Top Image Styling (Centered at the Top) */
 .top-card {
   width: 280px; /* Bigger size for the top image */
@@ -144,7 +145,7 @@
   }
 }
 
-.about-section .container{
+.about-section .container {
   max-width: 1600px;
   min-height: 800px;
 }

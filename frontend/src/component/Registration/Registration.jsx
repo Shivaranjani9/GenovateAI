@@ -18,6 +18,7 @@ const Registration = () => {
   const [securityAnswer, setSecurityAnswer] = useState("");
   const [errorField, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [users, setUsers] = useState([]);
 
   const nameInputRef = useRef(null);
 
@@ -32,25 +33,69 @@ const Registration = () => {
   };
 
   useEffect(() => {
-    // Auto-focus on the name input field when the component mounts
     if (nameInputRef.current) {
       nameInputRef.current.focus();
     }
 
-    // Clear form fields when the component unmounts
     return () => {
       clearFields();
     };
   }, []);
 
   useEffect(() => {
-    // Generate IDs when category changes
     if (category === "Researcher") {
       setResId(`RES${generateId()}`);
     } else if (category === "Lab Technician") {
       setLabId(`LAB${generateId()}`);
     }
   }, [category]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/users");
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const isPasswordValid = (password) => {
+    if (password.length < 8) {
+      return {
+        valid: false,
+        error: "Password should contain at least 8 characters",
+      };
+    }
+    if (!/[A-Z]/.test(password)) {
+      return {
+        valid: false,
+        error: "Password should contain at least 1 uppercase letter",
+      };
+    }
+    if (!/[a-z]/.test(password)) {
+      return {
+        valid: false,
+        error: "Password should contain at least 1 lowercase letter",
+      };
+    }
+    if (!/\d/.test(password)) {
+      return {
+        valid: false,
+        error: "Password should contain at least 1 digit",
+      };
+    }
+    if (!/[\W_]/.test(password)) {
+      return {
+        valid: false,
+        error: "Password should contain at least 1 special character",
+      };
+    }
+    return { valid: true };
+  };
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -99,18 +144,28 @@ const Registration = () => {
 
   const handleRegistration = (e) => {
     e.preventDefault();
+
     if (!category) {
       setError("Please select a category");
       return;
     }
+
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
+
+    const isValidPassword = isPasswordValid(password);
+    if (!isValidPassword.valid) {
+      setError(isValidPassword.error);
+      return;
+    }
+
     if (!name || !email || !phoneNumber || !gender || !password || !confirmPassword || !securityQuestion || !securityAnswer) {
       setError("All fields are required");
       return;
     }
+
     Register(category, resId, labId, name, email, phoneNumber, gender, password, securityQuestion, securityAnswer);
   };
 
@@ -273,6 +328,10 @@ const Registration = () => {
                   <option value="">Select Security Question</option>
                   <option value="What is your pet name?">What is your pet name?</option>
                   <option value="What is your favorite book?">What is your favorite book?</option>
+                  <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                  <option value="What is your favorite movie?">What is your favorite movie?</option>
+                  <option value="What city were you born in?">What city were you born in?</option>
+                  <option value="What is the name of your elementary school?">What is the name of your elementary school?</option>
                 </select>
               </div>
               <div className="registration-formgroup">

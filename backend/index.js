@@ -24,3 +24,18 @@ app.listen(process.env.PORT || 5000, () => {
   connectDB();
   console.log(`Server started at http://localhost:${process.env.PORT || 5000}`);
 });
+
+// Graceful shutdown
+process.on("SIGINT", async () => {
+  console.log("Shutting down server...");
+  await mongoose.connection.close();
+  console.log("MongoDB connection closed.");
+  process.exit(0);
+});
+
+process.on("SIGTERM", async () => {
+  console.log("Shutting down server...");
+  await mongoose.connection.close();
+  console.log("MongoDB connection closed.");
+  process.exit(0);
+});

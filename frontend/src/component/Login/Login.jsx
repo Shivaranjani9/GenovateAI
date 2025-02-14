@@ -63,6 +63,7 @@ const Login = () => {
   const Login = (category, resId, labId, password) => {
     setError("");
     const loginData = { category, resId, labId, password };
+    console.log("Login Payload:", loginData); // Debugging
     axios
       .post("http://localhost:5000/api/login", loginData)
       .then((response) => {
@@ -162,6 +163,10 @@ const Login = () => {
               <Link
                 to="/forgotpassword"
                 className="mb-3 mt-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover text-decoration-none"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/forgotpassword");
+                }}
               >
                 Forgot Password
               </Link>
