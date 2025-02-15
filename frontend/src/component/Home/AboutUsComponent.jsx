@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is loaded
 
 const AboutUsComponent = () => {
   const teamMembers = [
-    { id: 1, name: "Mohammed Mishbahuddin", role: "Project Guide", img: "/images/Mohammed Misbahuddin.png" },
+    { id: 1, name: "Dr.Mohammed Misbahuddin", role: "Head of CDAC,Bangalore", img: "/images/Mohammed Misbahuddin.png" },
     { id: 2, name: "Ms.Karuna P", role: "Project Guide", img: "/images/karuna mam.png" },
     { id: 3, name: "Ms.Nidhi Sahu", role: "Variant Impact Assesment Expert", img: "/images/Nidhi Sahu.png" },
     { id: 4, name: "Ms.Kalpana K L", role: "Variant Impact Assesment Expert", img: "/images/Kalpana.png" },

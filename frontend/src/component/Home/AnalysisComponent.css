@@ -90,99 +90,126 @@
   gap: 10px;
 }
 
-/* Arrow Styling */
-.arrow-down {
-  font-size: 2rem;
-  color: white;
-  transition: transform 0.3s ease-in-out;
-}
-
-.analysis-card:hover .arrow-down {
-  color: #ff9800;
-  transform: translateY(5px);
-}
-
-/* Highlight Title on Hover */
-.analysis-card:hover .analysis-title-overlay {
-  background-color: #ff9800;
-  color: black;
-}
-
 /* Modal (Dialog Box) Styling */
-.custom-modal.modal-large .modal-dialog {
-  max-width: 80vw;
+.custom-modal .modal-dialog {
+  max-width: 75vw;
+  max-height: 85vh;
+  transition: transform 0.4s ease-in-out;
+  transform: scale(0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.custom-modal.fade-in {
-  animation: fadeIn 0.3s ease-in-out;
+.custom-modal.show .modal-dialog {
+  transform: scale(1);
 }
 
-/* Modal Content Layout */
+.custom-modal .modal-content {
+  background-color: #e3f2fd;
+  border-radius: 10px;
+  padding: 30px;
+  transition: all 0.4s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-header-highlight {
+  background-color: #90caf9;
+  color: #222;
+  font-weight: bold;
+  font-size: 1.8rem;
+  width: 100%;
+  text-align: center;
+}
+
+.modal-body-blue {
+  background-color: #e3f2fd;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .modal-content-wrapper {
   display: flex;
   gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .modal-video-section {
   flex: 1;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 50%;
 }
 
 .modal-video {
   width: 100%;
+  max-width: 600px;
   border-radius: 10px;
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal-video:hover {
+  transform: scale(1.02);
+}
+
+.modal-info-section {
+  flex: 1;
+  text-align: left;
+  max-width: 50%;
 }
 
 .modal-description {
-  margin-top: 10px;
-  font-size: 1rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  color: #555;
-}
-
-/* Right Section */
-.modal-form-section {
-  flex: 1;
-  text-align: left;
-}
-
-.output-box {
-  background: #e0e0e0;
-  padding: 10px;
-  border-radius: 5px;
+  color: #333;
+  background: #e0f7fa;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #00acc1;
   text-align: center;
+  margin-top: 20px;
+}
+
+.input-description, .output-description {
+  background: #f1f8ff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #90caf9;
+  margin-bottom: 15px;
+  transition: background 0.3s ease-in-out;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
-.download-btn {
-  display: block;
-  width: 100%;
-  margin-top: 10px;
+.input-description:hover, .output-description:hover {
+  background: #cce5ff;
 }
 
-.chart-container {
-  margin-top: 20px;
-  width: 100%;
-  height: 200px;
+.highlight-title {
+  color: #1976d2;
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
 
-/* Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Responsive */
 @media (max-width: 992px) {
   .modal-content-wrapper {
     flex-direction: column;
+    align-items: center;
+  }
+  .modal-video-section, .modal-info-section {
+    max-width: 100%;
   }
 }
 
@@ -190,66 +217,20 @@
   .analysis-title {
     font-size: 1.8rem;
   }
-
   .analysis-image-container {
     height: 220px;
   }
-
   .analysis-title-overlay {
     font-size: 1.2rem;
     padding: 10px 15px;
   }
-}
-
-/* Output Box Styling */
-.output-box {
-  background: #e3f2fd; /* Light blue medical color */
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px solid #90caf9;
-  text-align: center;
-  margin-top: 15px;
-  font-weight: bold;
-  transition: background-color 0.3s ease-in-out;
-}
-
-/* Hover Effect - Output Box */
-.output-box:hover {
-  background-color: #c8e6c9; /* Light medical green */
-}
-
-/* Pie Chart Image */
-.output-image {
-  width: 100%;
-  max-width: 300px;
-  display: block;
-  margin: 15px auto 0;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-  .output-box {
-    padding: 12px;
+  .modal-content {
+    padding: 20px;
   }
-
-  .output-image {
-    max-width: 250px;
+  .modal-video {
+    max-width: 100%;
   }
-}
-
-@media (max-width: 768px) {
-  .output-box h5 {
-    font-size: 1rem;
+  .modal-description {
+    font-size: 1.5rem;
   }
-
-  .output-image {
-    max-width: 200px;
-  }
-}
-
-.analysis-section .container{
-  max-width: 1600px;
-  min-height: 800px;
 }

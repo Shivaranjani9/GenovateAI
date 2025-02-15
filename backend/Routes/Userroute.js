@@ -73,7 +73,6 @@ router.post("/login", async (req, res) => {
 });
 
 // Reset password
-// Reset password
 router.put("/reset-password", async (req, res) => {
   try {
     const { category, userId, secquestion, answer, password } = req.body;
