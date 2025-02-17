@@ -416,3 +416,76 @@
 .user-dashboard form button:hover {
   background-color: #219150;
 }
+
+
+/* Table under Analysis Panel */
+.analysis-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.analysis-panel th,
+.analysis-panel td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.analysis-panel th {
+  background-color: #00796b;
+  color: white;
+  font-weight: bold;
+}
+
+.analysis-panel tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.analysis-panel tr:hover {
+  background-color: #f1f1f1;
+}
+
+.analysis-panel td {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Increased Image Size */
+.analysis-panel td img {
+  width: 400px; /* Increase the width to make the image bigger */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 5px; /* Optional: Add rounded corners to the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for a better effect */
+}
+
+/* Responsive Table */
+@media screen and (max-width: 768px) {
+  .analysis-panel table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .analysis-panel th,
+  .analysis-panel td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .analysis-panel td img {
+    width: 300px; /* Adjust the image size on smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .analysis-panel th,
+  .analysis-panel td {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .analysis-panel td img {
+    width: 150px; /* Adjust the image size on very small screens */
+  }
+}

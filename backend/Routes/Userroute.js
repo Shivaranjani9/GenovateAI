@@ -194,8 +194,14 @@ router.delete("/user/:userId", async (req, res) => {
 // Log history
 router.post("/history", async (req, res) => {
   try {
-    const { userId, name, phone, analysisPreference } = req.body;
-    const history = new History({ userId, name, phone, analysisPreference });
+    const { userId, name, phone, analysisPreference, processTime } = req.body;
+    const history = new History({
+      userId,
+      name,
+      phone,
+      analysisPreference,
+      processTime: new Date(processTime),  // Make sure processTime is stored correctly
+    });
     await history.save();
     res.status(201).json({ message: "History logged successfully" });
   } catch (error) {
@@ -203,6 +209,7 @@ router.post("/history", async (req, res) => {
     res.status(500).json({ message: "Failed to log history", error: error.message });
   }
 });
+
 
 // Fetch history for a specific user
 router.get("/history/:userId", async (req, res) => {

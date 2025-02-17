@@ -6,7 +6,7 @@ import { FaBars, FaHome, FaChartLine, FaHistory, FaSignOutAlt } from "react-icon
 import axios from "axios";
 
 const Dashboard = () => {
-  
+
   const [user, setUser] = useState({
     name: "",
     phone: "",
@@ -62,28 +62,43 @@ const Dashboard = () => {
       alert("Please upload a FASTA file");
       return;
     }
-  
+
     try {
       // Create FormData to send the file as multipart/form-data
       const formData = new FormData();
       formData.append("file", file);
-  
+
       const response = await fetch("http://127.0.0.1:8000/mlapp/process/", {
         method: "POST",
         body: formData,  // Send the file inside formData
       });
-  
+
       if (!response.ok) {
         throw new Error("Error processing ML model");
       }
-  
+
       const data = await response.json();
       setImageUrl(data.image_url);
+
+      // Store process time and analysis preference in the history
+      const processTime = new Date().toISOString();
+      await axios.post("http://localhost:5000/api/history", {
+        userId,
+        name: user.name,
+        phone: user.phone,
+        analysisPreference,
+        processTime,  // Send process time to the backend
+      });
+
+      // Fetch history again to update the history panel
+      const historyResponse = await axios.get(`http://localhost:5000/api/history/${userId}`);
+      setHistory(historyResponse.data);
+
     } catch (error) {
       console.error("Error processing ML model:", error);
     }
   };
-  
+
 
   const handleChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
@@ -126,7 +141,7 @@ const Dashboard = () => {
     if (!selectedFile) return;
 
     const fileTypeMap = {
-      "Gene Expression": [".fasta",".fa"],
+      "Gene Expression": [".fasta", ".fa"],
       "Lung Cancer Prediction": [".jpeg", ".png"],
       "Functional Annotation": [".csv"],
       "Variant Risk": [".fasta", ".cvf"],
@@ -251,23 +266,23 @@ const Dashboard = () => {
             <input type="file" onChange={handleFileChange} />
             <button className="process-btn" onClick={handleProcess}>Process</button>
             {imageUrl && (
-        <table>
-          <thead>
-            <tr>
-              <th>Generated Image</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <a href={imageUrl} target="_blank" rel="noopener noreferrer">
-                  <img src={imageUrl} alt="ML Output" width="200" />
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      )}
+              <table>
+                <thead>
+                  <tr>
+                    <th>Generated Image</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <a href={imageUrl} target="_blank" rel="noopener noreferrer">
+                        <img src={imageUrl} alt="ML Output" width="200" />
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
           </div>
         ) : (
           <div className="history-panel">
@@ -291,6 +306,7 @@ const Dashboard = () => {
                   </tr>
                 ))}
               </tbody>
+
             </table>
           </div>
         )}
