@@ -189,6 +189,8 @@ const Registration = () => {
       .catch((error) => {
         setError(error?.response?.data?.message);
         console.error("Error during registration:", error);
+        console.log("User already exist");
+        alert("User already exist");
       });
   };
 
@@ -350,7 +352,7 @@ const Registration = () => {
                 Already a Member?
                 <Link
                   to="/login"
-                  className="mb-3 mt-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                  className="mb-3 mt-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover text-decoration-none"
                 >
                   Login
                 </Link>

@@ -77,6 +77,7 @@ const Login = () => {
           let token = "ASJDFJF87ADF8745LK4598SAD7FAJSDF45JSDLFKAS";
           sessionStorage.setItem("user-token", token);
           sessionStorage.setItem("category", category);
+          sessionStorage.setItem("userId", category === "Researcher" ? resId : labId); // Store userId
           navigate(strReturnUrl);
           setError(response.data.message);
         } else {

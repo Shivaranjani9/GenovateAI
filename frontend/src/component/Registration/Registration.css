@@ -21,7 +21,7 @@
   position: relative;
   overflow: hidden;
   width: 1000px; /* Increased width */
-  min-height: 700px; /* Increased height */
+  min-height: 500px; /* Increased height */
   background-color: white; /* Ensure the container has a background */
   display: flex; /* Use flexbox for layout */
 }
@@ -49,7 +49,7 @@
   line-height: 25px;
   letter-spacing: 1px;
   margin: 20px 0 30px;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .registration-form-container {
@@ -141,11 +141,14 @@ input::placeholder {
 .registration-input-form {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Space between inputs */
+  margin-top: 5px;
+  gap: 5px; /* Space between inputs */
 }
 
 .registration-formgroup {
-  flex: 1 1 calc(50% - 10px); /* Two inputs per row */
+  flex: 1 1 calc(50% - 5px); /* Two inputs per row */
+  position: relative;
+  margin-bottom: 5px; 
 }
 
 /* Exclude button, link, and error message from side-by-side layout */

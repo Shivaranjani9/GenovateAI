@@ -193,7 +193,7 @@ function ForgotPassword() {
                 Submit
               </button>
               <p className="forgotpassword-d-inline">
-                Remembered your password?
+                Remember your password?
                 <Link
                   to="/login"
                   className="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover text-decoration-none"
