@@ -31,7 +31,7 @@ const AboutUsComponent = () => {
         {/* Top Images (Centered at the Top) */}
         <div className="row justify-content-center">
           {/* Display the first two team members (ID 1 and 2) at the top */}
-          {teamMembers.slice(0, 2).map((member) => (
+          {teamMembers.slice(0, 1).map((member) => (
             <div key={member.id} className="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center">
               <div className="flip-card top-card">
                 <div className="flip-card-inner">
