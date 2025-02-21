@@ -1,6 +1,14 @@
+To install the frontend,GenovateAI>
+->cd frontend
+->npm install
+
 To run the frontend,GenovateAI>
 ->cd frontend
 ->npm run dev
+
+To install the backend,
+->cd backend
+->pip install -r requirements.txt
 
 To run the Backend(Nodejs+MongoDB),GenovateAI>
 ->npm run dev
