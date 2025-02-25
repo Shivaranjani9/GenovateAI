@@ -14,4 +14,5 @@ To run the Backend(Nodejs+MongoDB),GenovateAI>
 
 To run the django,GenovateAI>
 ->cd ML/backend
+->pip install requirements.txt
 ->python manage.py runserver
